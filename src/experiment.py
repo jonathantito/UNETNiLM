@@ -26,9 +26,9 @@ class NILMExperiment(object):
         Parameters to be specified for the model
         """
         self.MODEL_NAME = params.get('model_name',"CNNModel")
-        self.logs_path =params.get('log_path',"../logs/")
-        self.checkpoint_path =params.get('checkpoint_path',"../checkpoints/")
-        self.results_path = params.get('results_path',"../results/")
+        self.logs_path =params.get('log_path',"/workspaces/torch-nilm/unet-nilm/UNETNiLM/logs/")#"../logs/")
+        self.checkpoint_path =params.get('checkpoint_path',"/workspaces/torch-nilm/unet-nilm/UNETNiLM/checkpoints/")#"../checkpoints/")
+        self.results_path = params.get('results_path',"/workspaces/torch-nilm/unet-nilm/UNETNiLM/results/")#"../results/")
         self.chunk_wise_training = params.get('chunk_wise_training',False)
         self.sequence_length = params.get('sequence_length',99)
         self.n_epochs = params.get('n_epochs', 10 )
@@ -118,7 +118,7 @@ def run_experiments(model_name="CNN1D", denoise=True,
                 'quantiles':quantiles,
                 "denoise":denoise,
                 'file_name':file_name,
-                "checkpoint_path" :f"../checkpoints/{file_name}/"
+                "checkpoint_path" :f"/workspaces/torch-nilm/unet-nilm/UNETNiLM/checkpoints/{file_name}/"#f"../checkpoints/{file_name}/"
                 }
     exp = NILMExperiment(params)
     results, results_path=exp.fit()

@@ -17,7 +17,9 @@ from torchmetrics.functional import f1
 class NILMnet(pl.LightningModule):
     def __init__(self, hparams):
         super().__init__()
-        self.hparams = ObjectDict()
+        #self.hparams = ObjectDict()
+        for key in hparams.keys():
+            self.hparams[key]=hparams[key]
         self.hparams.update(hparams.__dict__ if hasattr(hparams, '__dict__') else hparams)
         self._data = None
         self.q_criterion = QuantileLoss(self.hparams.quantiles)
