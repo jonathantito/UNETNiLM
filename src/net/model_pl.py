@@ -10,7 +10,8 @@ from net.metrics import  compute_metrics, compute_regress_metrics, get_results_s
 from data.load_data import ukdale_appliance_data 
 from data.data_loader import Dataset, load_data, spilit_refit_test
 from .utils import ObjectDict, QuantileLoss
-from pytorch_lightning.metrics.functional import f1_score
+#from pytorch_lightning.metrics.functional import f1_score
+from torchmetrics.functional import f1
 
 
 class NILMnet(pl.LightningModule):
@@ -100,8 +101,8 @@ class NILMnet(pl.LightningModule):
             prob=prob.unsqueeze(1).expand_as(pred_power)
             
         else: 
-            
-        logs = {"pred_power":pred_power, "pred_state":pred_state, "power":y, "state":z}
+            logs = {"pred_power":pred_power, "pred_state":pred_state, "power":y, "state":z}
+        #logs = {"pred_power":pred_power, "pred_state":pred_state, "power":y, "state":z}
         return logs
     
     def test_epoch_end(self, outputs):

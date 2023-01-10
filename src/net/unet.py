@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from .block import Conv1D, Deconv1D
+#from .block import Conv1D, Deconv1D
+from .layers import Conv1D, Deconv1D
 
 class Up(nn.Module):
    

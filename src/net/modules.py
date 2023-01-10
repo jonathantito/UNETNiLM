@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from .layers import MLPLayer,  Encoder
-from .unet import UNetBaseline
+from .unet import UNetCNN1D #UNetBaseline
 import torch.nn.init as init
 import math
 
@@ -58,7 +58,8 @@ class UNETNiLM(nn.Module):
                  n_quantiles=3, 
                  pool_filter=16):
         super().__init__()
-        self.unet = UNetBaseline(num_classes=output_size, num_layers=n_layers, features_start=features_start, n_channels=in_size)
+        self.unet = UNetCNN1D(num_classes=output_size, num_layers=n_layers, features_start=features_start, n_channels=in_size)
+        #UNetBaseline(num_classes=output_size, num_layers=n_layers, features_start=features_start, n_channels=in_size)
         self.conv_layer = Encoder(n_channels=output_size, n_kernels=d_model, n_layers=n_layers//2, seq_size=seq_len)
         self.mlp_layer = MLPLayer(in_size=d_model*pool_filter, hidden_arch=[1024], output_size=None)
         self.dropout = nn.Dropout(dropout)
